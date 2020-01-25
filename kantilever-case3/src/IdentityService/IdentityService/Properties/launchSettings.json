@@ -1,0 +1,18 @@
+{
+  "profiles": {
+    "IdentityService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "DB_CONNECTION_STRING": "Host=localhost;Port=5432;Database=IdentityServiceDb;Username=postgres;Password=root",
+        "BROKER_EXCHANGE_NAME": "Kantilever.Eventbus",
+        "BROKER_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONFIG_PATH_CLIENTS": "Data/clients.json",
+        "CONFIG_PATH_IDS": "Data/ids.json",
+        "CONFIG_PATH_APIS": "Data/apis.json"
+      },
+      "applicationUrl": "http://localhost:5100"
+    }
+  }
+}

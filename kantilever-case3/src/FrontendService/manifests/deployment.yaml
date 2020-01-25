@@ -1,0 +1,62 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: frontend-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend-service
+    spec:
+      containers:
+        - name: frontend-service
+          image: minor2019.azurecr.io/macedonieje-frontend-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          env:
+            - name: BROKER_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: url
+            - name: BROKER_EXCHANGE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: exchange
+            - name: DB_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: frontendservice-secret
+                  key: connectionString
+            - name: VOORRAAD_SERVICE_URL
+              value: http://if-magazijn-service
+            - name: CATALOGUS_SERVICE_URL
+              value: http://if-catalogus-service
+            - name: AUDITLOGGER_URL
+              value: http://if-auditlog-service
+            - name: AUTH_AUTHORITY
+              value: http://identity.macedonieje.maartenprojecten.nl
+            - name: BROKER_REPLAY_EXCHANGE_NAME
+              value: Kantilever.FrontendService.ReplayExchange
+            - name: ANGULAR_AUTHORITY
+              value: http://identity.macedonieje.maartenprojecten.nl
+            - name: ANGULAR_CLIENTID
+              value: kantilever.webshop.angular
+            - name: ANGULAR_RESPONSE_TYPE
+              value: id_token token
+            - name: ANGULAR_REDIRECT_URI
+              value: http://macedonieje.maartenprojecten.nl/auth-callback
+            - name: ANGULAR_SCOPE
+              value: openid profile kantilever.webshopapi
+            - name: ANGULAR_POST_LOGOUT_REDIRECT_URI
+              value: http://macedonieje.maartenprojecten.nl

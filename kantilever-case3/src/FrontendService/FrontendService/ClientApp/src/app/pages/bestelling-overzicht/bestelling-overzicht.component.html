@@ -1,0 +1,20 @@
+<div>
+    <div class="title-container">
+        <h1>Overzicht van mijn bestelling</h1>
+    </div>
+    <div>
+        <app-winkelwagen-overzicht [editable]="false"></app-winkelwagen-overzicht>
+    </div>
+    <div class="adres-container">
+        <div class="adres-item">
+            <app-adres [adres]="afleverAdres">Afleveradres</app-adres>
+        </div>
+        <div class="adres-item">
+            <app-adres [adres]="factuurAdres">Factuuradres</app-adres>
+        </div>
+    </div>
+    <div class="action-container d-flex justify-content-between">
+        <button (click)="terug()" type="button" class="btn btn-primary" >Terug</button>
+        <button (click)="bestellen()" type="button" class="btn btn-success">Bestellen</button>
+    </div>
+</div>

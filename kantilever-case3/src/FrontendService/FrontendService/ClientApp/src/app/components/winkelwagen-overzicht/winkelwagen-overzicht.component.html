@@ -1,0 +1,41 @@
+<div>
+    <div class="card">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Artikel</th>
+                    <th scope="col">Aantal</th>
+                    <th scope="col">Prijs/Stuk</th>
+                    <th scope="col">Subtotaal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let regel of winkelwagenRijen">
+                    <td>{{ regel.artikel.naam }}</td>
+                    <td *ngIf="!editable">{{ regel.aantal }}</td>
+                    <td *ngIf="editable">
+                        <input min="1" (change)="changeAantal(regel, $event.target.value)"
+                            class="form-control aantal-editor" type="number" [value]="regel.aantal">
+                        <span class="bin" (click)="removeArtikel(regel)">
+                            <fa name="trash"></fa>
+                        </span>
+                    </td>
+                    <td>{{ regel.artikel.prijsInclBtw | currency:'EUR' }}</td>
+                    <td>{{ berekenRegelTotaal(regel) | currency:'EUR' }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Verzendkosten</td>
+                    <td>{{ verzendKosten | currency:'EUR' }}</td>
+                </tr>
+                <tr *ngIf="!winkelwagenRijen || winkelwagenRijen.length === 0">
+                    <td id="geenArtikelen">winkelmandje is leeg, ga snel op de artikelen pagina kijken</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="total-container">
+        <h2 class="total-line">Totaal {{ berekenTotaal(winkelwagenRijen) | currency:'EUR' }}</h2>
+        <h4 class="total-line">Totaal Excl. BTW {{ berekenExclBtwTotaal(winkelwagenRijen) | currency:'EUR' }}</h4>
+    </div>
+</div>

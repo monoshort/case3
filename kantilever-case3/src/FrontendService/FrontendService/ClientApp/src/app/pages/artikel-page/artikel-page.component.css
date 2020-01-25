@@ -1,0 +1,47 @@
+.artikel-detail-container {
+    display: flex;
+    margin: 0 10vw 0 10vw;
+}
+
+.flex-2 {
+    flex: 2;
+}
+
+.artikel-details {
+    margin-left: 5vw
+}
+
+.artikel-detail {
+    display: inline;
+    margin: 10px 0 10px 10px;
+}
+
+.artikel-detail-name {
+    font-weight: bold;
+}
+
+.artikel-description {
+    margin-top: 5vh;
+}
+
+.description {
+    padding: 20px;
+    text-align: justify;
+}
+
+.action-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end
+}
+
+.button-container {
+    display: inline-flex;
+    align-items: center;
+}
+
+.button {
+    margin-left: 10px;
+    height: 50px;
+    width: 110px;
+}

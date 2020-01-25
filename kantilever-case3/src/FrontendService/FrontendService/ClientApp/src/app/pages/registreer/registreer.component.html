@@ -1,0 +1,91 @@
+<div class="formbody">
+  <div class="card formcard">
+    <div class="card-body">
+      <form [formGroup]="registreerForm">
+        <section>
+          <h3 class="title">Logingegevens</h3>
+          <div class="form-group">
+            <label>Email:</label>
+            <input class="form-control" type="text" formControlName="email">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+              Email is verplicht!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Wachtwoord:</label>
+            <input class="form-control" type="password" formControlName="password">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+              Wachtwoord is verplicht!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Wachtwoord bevestigen:</label>
+            <input class="form-control" type="password" formControlName="password2">
+            <ng-container *ngIf="password2.dirty || password2.touched">
+              <div *ngIf="password2.invalid" class="alert alert-danger">
+                Wachtwoord is verplicht!
+              </div>
+              <div *ngIf="!passwordsAreEqual" class="alert alert-danger">
+                Wachtwoorden zijn niet gelijk!
+              </div>
+            </ng-container>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="title">Persoonlijke gegevens</h3>
+          <div class="form-group">
+            <label>Naam:</label>
+            <input class="form-control" type="text" formControlName="naam">
+            <div *ngIf="naam.invalid && (naam.dirty || naam.touched)" class="alert alert-danger">
+              Naam is verplicht!
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Telefoonnummer:</label>
+            <input class="form-control" type="text" formControlName="telefoonnummer">
+            <div *ngIf="telefoonnummer.invalid && (telefoonnummer.dirty || telefoonnummer.touched)"
+                 class="alert alert-danger">
+              Telefoonnummer is verplicht!
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h3 class="title">Adresgegevens</h3>
+          <div formGroupName="adres">
+            <div class="form-group">
+              <label>Straatnaam en huisnummer:</label>
+              <input class="form-control" type="text" formControlName="straatnaamHuisnummer">
+              <div *ngIf="straatnaamHuisnummer.invalid && (straatnaamHuisnummer.dirty || straatnaamHuisnummer.touched)"
+                   class="alert alert-danger">
+                Straatnaam en huisnummer zijn verplicht!
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Postcode:</label>
+              <input class="form-control" type="text" formControlName="postcode">
+              <div *ngIf="postcode.invalid && (postcode.dirty || postcode.touched)" class="alert alert-danger">
+                Postcode is verplicht!
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>Woonplaats:</label>
+              <input class="form-control" type="text" formControlName="woonplaats">
+              <div *ngIf="woonplaats.invalid && (woonplaats.dirty || woonplaats.touched)" class="alert alert-danger">
+                Woonplaats is verplicht!
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <button [disabled]="!formsAreValid" (click)="registreer()" class="btn btn-primary">
+          Registreer
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

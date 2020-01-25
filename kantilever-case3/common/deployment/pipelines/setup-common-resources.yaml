@@ -1,0 +1,41 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - common/deployment/*
+
+variables:
+  tag: '$(Build.BuildId)'
+  imagePullSecret: 'minor20191672b099-auth'
+  manifestFolder: common/deployment/manifests/**/*.yaml
+  vmImageName: 'ubuntu-latest'
+  kubernetesServiceConnection: 'K8s'
+  dockerRegistryServiceConnection: 'Minor2019Registry'
+
+stages:
+  - stage: Deploy
+    displayName: Deploy manifests
+    jobs:
+    - job: Deploy
+      displayName: Deploy
+      pool:
+        vmImage: $(vmImageName)
+      steps:
+        - task: KubernetesManifest@0
+          displayName: Create imagePullSecret
+          inputs:
+            namespace: macedonieje
+            action: createSecret
+            secretName: $(imagePullSecret)
+            dockerRegistryEndpoint: $(dockerRegistryServiceConnection)
+            kubernetesServiceConnection: $(kubernetesServiceConnection)
+        - task: KubernetesManifest@0
+          displayName: Deploy to Kubernetes cluster
+          inputs:
+            namespace: macedonieje
+            action: deploy
+            manifests: $(manifestFolder)
+            imagePullSecrets: $(imagePullSecret)
+            kubernetesServiceConnection: $(kubernetesServiceConnection)

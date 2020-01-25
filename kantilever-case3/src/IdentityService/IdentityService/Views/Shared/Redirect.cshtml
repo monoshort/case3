@@ -1,0 +1,7 @@
+@model RedirectViewModel
+
+<h1>U wordt nou doorgestuurd naar de applicatie</h1>
+<p>Zodra dat gelukt is, mag deze tab gesloten worden</p>
+
+<meta http-equiv="refresh" content="0;url=@Model.RedirectUrl" data-url="@Model.RedirectUrl">
+<script src="~/js/signin-redirect.js"></script>

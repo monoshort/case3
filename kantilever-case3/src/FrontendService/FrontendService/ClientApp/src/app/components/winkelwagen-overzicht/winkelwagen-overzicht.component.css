@@ -1,0 +1,22 @@
+.bold-text {
+    font-weight: bold;
+}
+
+.total-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.total-line {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.aantal-editor {
+    display: inline;
+    width: 100px;
+}
+
+.bin {
+    margin: 10px;
+}

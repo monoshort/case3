@@ -1,0 +1,22 @@
+.adres-list-group-item {
+    position: relative;
+    display: block;
+    padding-left: 10px;
+    padding-top: 2px;
+    margin-bottom: -1px;
+    background-color: #fff;
+}
+
+.address-type {
+    padding:10px
+}
+
+.address-type-container {
+    min-width: 16em;
+}
+
+td {
+    font-weight: 500;
+    border-top: none;
+    padding-left: 10px;
+}

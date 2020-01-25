@@ -1,0 +1,39 @@
+@model IEnumerable<VoorraadMagazijn>
+
+<h1>Bij te bestellen producten</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Artikelnummer</th>
+        <th scope="col">Leverancier</th>
+        <th scope="col">Leveranciercode</th>
+        <th scope="col">Aantal</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (VoorraadMagazijn voorraad in Model)
+    {
+        <tr>
+            <td>
+                @voorraad.ArtikelNummer
+            </td>
+            <td>
+                @voorraad.Leverancier
+            </td>
+            <td>
+                @voorraad.Leveranciercode
+            </td>
+            <td>
+                @voorraad.BijTeBestellen
+            </td>
+            <td>
+                <a asp-controller="Voorraad" asp-action="BijBesteld" asp-route-artikelNummer="@voorraad.ArtikelNummer">
+                    Bijbesteld
+                </a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

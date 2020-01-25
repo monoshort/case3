@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "BackOfficeFrontendservice": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "http://localhost:5500",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "BROKER_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "BROKER_EXCHANGE_NAME": "Kantilever.Eventbus",
+        "DB_CONNECTION_STRING": " User ID=postgres;Password=root;Host=localhost;Port=5432;DB=BackOfficeFrontendServiceDb;",
+        "AUTH_CLIENT_SECRET": "49C1A7E1-0C79-4A89-A3D6-A37998FB86B0",
+        "AUTH_CLIENT_ID": "kantilever.backofficemvc",
+        "AUTH_AUTHORITY": "http://localhost:5000",
+        "VOORRAAD_SERVICE_URL": "http://localhost:2021",
+        "CATALOGUS_SERVICE_URL": "http://localhost:2020",
+        "AUDITLOGGER_URL": "http://localhost:2022",
+        "BROKER_REPLAY_EXCHANGE_NAME": "Kantilever.BackOfficeFrontendService.ReplayExchange"
+      }
+    }
+  }
+}

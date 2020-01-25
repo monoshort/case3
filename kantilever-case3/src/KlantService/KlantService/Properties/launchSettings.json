@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "KlantService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "DB_CONNECTION_STRING": "Host=localhost;Port=5432;Database=KlantServiceDb;Username=postgres;Password=root",
+        "BROKER_EXCHANGE_NAME": "Kantilever.Eventbus",
+        "BROKER_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5600"
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "profiles": {
+    "FrontendService": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "DB_CONNECTION_STRING": "Host=localhost;Port=5432;Database=FrontendServiceDb;Username=postgres;Password=root",
+        "BROKER_EXCHANGE_NAME": "Kantilever.Eventbus",
+        "BROKER_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "CATALOGUS_SERVICE_URL": "http://localhost:2020",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "VOORRAAD_SERVICE_URL": "http://localhost:2021",
+        "AUTH_AUTHORITY": "http://identity:5000",
+        "AUDITLOGGER_URL": "http://localhost:2022",
+        "BROKER_REPLAY_EXCHANGE_NAME": "Kantilever.FrontendService.ReplayExchange",
+
+        "ANGULAR_AUTHORITY": "http://localhost:5000",
+        "ANGULAR_CLIENTID": "kantilever.webshop.angular",
+        "ANGULAR_RESPONSE_TYPE": "id_token token",
+        "ANGULAR_REDIRECT_URI": "http://localhost:5100/auth-callback",
+        "ANGULAR_SCOPE": "openid profile kantilever.webshopapi",
+        "ANGULAR_POST_LOGOUT_REDIRECT_URI": "http://localhost:5100"
+      },
+      "applicationUrl": "http://localhost:5100"
+    }
+  }
+}

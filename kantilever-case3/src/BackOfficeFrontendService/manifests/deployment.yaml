@@ -1,0 +1,59 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: backofficefrontend-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backofficefrontend-service
+    spec:
+      containers:
+        - name: backofficefrontend-service
+          image: minor2019.azurecr.io/macedonieje-backofficefrontend-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 256Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          env:
+            - name: BROKER_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: url
+            - name: BROKER_EXCHANGE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: exchange
+            - name: DB_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: backofficefrontend-secret
+                  key: connectionString
+            - name: AUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backofficefrontend-secret
+                  key: authClientSecret
+            - name: AUTH_CLIENT_ID
+              value: kantilever.backofficemvc
+            - name: AUTH_AUTHORITY
+              value: http://identity.macedonieje.maartenprojecten.nl
+            - name: VOORRAAD_SERVICE_URL
+              value: http://if-magazijn-service
+            - name: CATALOGUS_SERVICE_URL
+              value: http://if-catalogus-service
+            - name: AUDITLOGGER_URL
+              value: http://if-auditlog-service
+            - name: BROKER_REPLAY_EXCHANGE_NAME
+              value: Kantilever.BackOfficeFrontendService.ReplayExchange
+
+

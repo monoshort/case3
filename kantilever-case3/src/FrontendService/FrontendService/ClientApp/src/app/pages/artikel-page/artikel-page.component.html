@@ -1,0 +1,59 @@
+<div *ngIf="artikel">
+    <div class="artikel-detail-container">
+        <div class="flex-2">
+            <img src="/img/{{ artikel.afbeeldingUrl }}" class="card-img-top img-height" alt="fiets">
+            <div class="card artikel-description">
+                <div class="artikel-detail">
+                    <label class="artikel-detail-name">Productbeschrijving:</label>
+                    <p class="card-text description">{{ artikel.beschrijving || "Niet bekend" }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-2 artikel-details card ">
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Naam:</label>
+                <p class="card-text ">{{ artikel.naam || "Niet bekend" }}</p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Prijs:</label>
+                <p class="card-text">
+                    {{ artikel.prijsInclBtw | currency:'EUR' || "Niet bekend" }}
+                </p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Leverancier:</label>
+                <p class="card-text ">{{ artikel.leverancier || "Niet bekend" }}</p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Leverancier code:</label>
+                <p class="card-text ">{{ artikel.leverancierCode || "Niet bekend" }}</p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Categorie:</label>
+                <p class="card-text ">{{ artikel.categorie || "Niet bekend" }}</p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Subcategorie:</label>
+                <p class="card-text ">{{ artikel.subCategorie || "Niet bekend" }}</p>
+            </div>
+            <div class="artikel-detail">
+                <label class="artikel-detail-name">Leverbaarheid:</label>
+                <p class="card-text ">Vanaf {{ artikel.leverbaarVanaf | date:'dd-mm-yyy' }}
+                    {{ artikel.leverbaarTot == null ? "" :" Tot " + artikel.leverbaarTot | date:'dd-mm-yyyy'}}</p>
+            </div>
+        </div>
+    </div>
+    <div class="artikel-detail-container action-container">
+        <form class="button-container" [formGroup]="aanWinkelwagenToevoegForm">
+            <input min="1" class="form-control small" type="number" formControlName="hoeveelheid">
+            <button type="button" (click)="addToWinkelwagen()" class="btn btn-primary big button">
+              <span>
+                <fa name="plus"></fa>
+                &nbsp;
+                <fa name="shopping-basket"></fa>
+              </span>
+            </button>
+          </form>
+    </div>
+</div>

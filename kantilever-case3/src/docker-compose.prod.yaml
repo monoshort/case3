@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  frontend:
+    image: minor2019.azurecr.io/macedonieje-frontend-service:latest
+  identity:
+    image: minor2019.azurecr.io/macedonieje-identity-service:latest
+  klant:
+    image: minor2019.azurecr.io/macedonieje-klant-service:latest
+  bestel:
+    image: minor2019.azurecr.io/macedonieje-bestel-service:latest
+  backoffice-frontend:
+    image: minor2019.azurecr.io/macedonieje-backofficefrontend-service:latest

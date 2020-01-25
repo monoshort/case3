@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "BackOfficeFrontendService.Test.Integration": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "APP_URL": "http://localhost:3000"
+      }
+    }
+  }
+}

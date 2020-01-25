@@ -1,0 +1,53 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: identity-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: identity-service
+    spec:
+      volumes:
+        - name: config-volume
+          configMap:
+            name: identity-configmap
+      containers:
+        - name: identity-service
+          image: minor2019.azurecr.io/macedonieje-identity-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 60m
+              memory: 80Mi
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/Data
+          env:
+            - name: BROKER_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: url
+            - name: BROKER_EXCHANGE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: exchange
+            - name: DB_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: identityservice-secret
+                  key: connectionString
+            - name: CONFIG_PATH_CLIENTS
+              value: /app/Data/clients.json
+            - name: CONFIG_PATH_IDS
+              value: /app/Data/ids.json
+            - name: CONFIG_PATH_APIS
+              value: /app/Data/apis.json

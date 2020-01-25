@@ -1,0 +1,33 @@
+{
+  "stryker-config":
+  {
+    "test-runner": "vstest",
+    "log-level": "info",
+    "log-file":true,
+    "timeout-ms": 10000,
+    "project-file": "BackOfficeFrontendService.csproj",
+    "max-concurrent-test-runners": 4,
+    "threshold-high": 80,
+    "threshold-low": 70,
+    "threshold-break": 65,
+    "file-patterns": [
+      "!wwwroot"
+    ],
+    "files-to-exclude": [
+      "**/Migrations/**",
+      "**/Constants/**",
+      "**/lib/**",
+      "**Context.cs",
+      "Startup.cs",
+      "Program.cs"
+    ],
+    "ignore-methods":  [
+      "*Log*",
+      "ToString",
+      "*HashCode*"
+    ],
+    "excluded-mutations": [
+      "string"
+    ]
+  }
+}

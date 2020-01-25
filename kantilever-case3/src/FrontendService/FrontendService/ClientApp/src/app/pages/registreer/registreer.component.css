@@ -1,0 +1,8 @@
+.formcard {
+  width: 40%;
+}
+
+.formbody {
+  display: flex;
+  justify-content: center;
+}

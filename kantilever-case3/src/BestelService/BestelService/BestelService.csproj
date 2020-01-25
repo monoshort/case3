@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+        <ProjectGuid>A5CC81B0-7E11-478C-A0E0-976A674827C6</ProjectGuid>
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="MaartenH.Minor.Miffy.Abstractions" Version="2.3.1" />
+        <PackageReference Include="MaartenH.Minor.Miffy.Microservices" Version="2.3.1" />
+        <PackageReference Include="MaartenH.Minor.Miffy.RabbitMQBus" Version="2.3.1" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BestelService.Core\BestelService.Core.csproj" />
+      <ProjectReference Include="..\BestelService.Infrastructure\BestelService.Infrastructure.csproj" />
+    </ItemGroup>
+</Project>

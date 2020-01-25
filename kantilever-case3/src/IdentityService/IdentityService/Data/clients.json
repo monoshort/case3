@@ -1,0 +1,134 @@
+[
+  {
+    "Enabled": true,
+    "ClientId": "kantilever.backofficemvc",
+    "ProtocolType": "oidc",
+    "ClientSecrets": [
+      {
+        "Description": null,
+        "Value": "o90IbCACXKUkunXoa18cODcLKnQTbjOo5ihEw9j58+8=",
+        "Expiration": null,
+        "Type": "SharedSecret"
+      }
+    ],
+    "RequireClientSecret": true,
+    "ClientName": "Kantilever Back Office",
+    "Description": null,
+    "ClientUri": null,
+    "LogoUri": null,
+    "RequireConsent": false,
+    "AllowRememberConsent": true,
+    "AllowedGrantTypes": [
+      "authorization_code"
+    ],
+    "RequirePkce": true,
+    "AllowPlainTextPkce": false,
+    "AllowAccessTokensViaBrowser": false,
+    "RedirectUris": [
+      "http://localhost:5500/signin-oidc",
+      "http://localhost:3000/signin-oidc"
+    ],
+    "PostLogoutRedirectUris": [
+      "http://localhost:5500/signout-callback-oidc",
+      "http://localhost:3000/signout-callback-oidc"
+    ],
+    "FrontChannelLogoutUri": "http://localhost:5500/signout-oidc",
+    "FrontChannelLogoutSessionRequired": true,
+    "BackChannelLogoutUri": null,
+    "BackChannelLogoutSessionRequired": true,
+    "AllowOfflineAccess": true,
+    "AllowedScopes": [
+      "openid",
+      "profile",
+      "kantilever.backofficeapi"
+    ],
+    "AlwaysIncludeUserClaimsInIdToken": false,
+    "IdentityTokenLifetime": 300,
+    "AccessTokenLifetime": 3600,
+    "AuthorizationCodeLifetime": 300,
+    "AbsoluteRefreshTokenLifetime": 2592000,
+    "SlidingRefreshTokenLifetime": 1296000,
+    "ConsentLifetime": null,
+    "RefreshTokenUsage": 1,
+    "UpdateAccessTokenClaimsOnRefresh": false,
+    "RefreshTokenExpiration": 1,
+    "AccessTokenType": 0,
+    "EnableLocalLogin": true,
+    "IdentityProviderRestrictions": [],
+    "IncludeJwtId": false,
+    "Claims": [],
+    "AlwaysSendClientClaims": false,
+    "ClientClaimsPrefix": "client_",
+    "PairWiseSubjectSalt": null,
+    "UserSsoLifetime": null,
+    "UserCodeType": null,
+    "DeviceCodeLifetime": 300,
+    "AllowedCorsOrigins": [],
+    "Properties": {}
+  },
+  {
+    "Enabled": true,
+    "ClientId": "kantilever.webshop.angular",
+    "ProtocolType": "oidc",
+    "ClientSecrets": [],
+    "RequireClientSecret": false,
+    "ClientName": "Kantilever Webshop",
+    "Description": null,
+    "ClientUri": null,
+    "LogoUri": null,
+    "RequireConsent": false,
+    "AllowRememberConsent": true,
+    "AllowedGrantTypes": [
+      "implicit"
+    ],
+    "RequirePkce": true,
+    "AllowPlainTextPkce": false,
+    "AllowAccessTokensViaBrowser": true,
+    "RedirectUris": [
+      "http://localhost:4000/auth-callback",
+      "http://localhost:4000/",
+      "http://localhost:5100/auth-callback",
+      "http://localhost:5100/"
+    ],
+    "PostLogoutRedirectUris": [
+      "http://localhost:4000/",
+      "http://localhost:5100/"
+    ],
+    "FrontChannelLogoutUri": null,
+    "FrontChannelLogoutSessionRequired": true,
+    "BackChannelLogoutUri": null,
+    "BackChannelLogoutSessionRequired": true,
+    "AllowOfflineAccess": false,
+    "AllowedScopes": [
+      "openid",
+      "profile",
+      "kantilever.webshopapi"
+    ],
+    "AlwaysIncludeUserClaimsInIdToken": false,
+    "IdentityTokenLifetime": 300,
+    "AccessTokenLifetime": 3600,
+    "AuthorizationCodeLifetime": 300,
+    "AbsoluteRefreshTokenLifetime": 2592000,
+    "SlidingRefreshTokenLifetime": 1296000,
+    "ConsentLifetime": null,
+    "RefreshTokenUsage": 1,
+    "UpdateAccessTokenClaimsOnRefresh": false,
+    "RefreshTokenExpiration": 1,
+    "AccessTokenType": 0,
+    "EnableLocalLogin": true,
+    "IdentityProviderRestrictions": [],
+    "IncludeJwtId": false,
+    "Claims": [],
+    "AlwaysSendClientClaims": false,
+    "ClientClaimsPrefix": "client_",
+    "PairWiseSubjectSalt": null,
+    "UserSsoLifetime": null,
+    "UserCodeType": null,
+    "DeviceCodeLifetime": 300,
+    "AllowedCorsOrigins": [
+      "http://localhost:4000",
+      "http://localhost:5100"
+    ],
+    "Properties": {}
+  }
+]

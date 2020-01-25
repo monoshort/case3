@@ -1,0 +1,17 @@
+.title-container {
+    padding-bottom: 10vh;
+}
+
+.adres-container {
+    display: flex;
+
+}
+
+.action-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.adres-item {
+    padding: 10px;
+}

@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+      <TargetFramework>netcoreapp3.0</TargetFramework>
+      <ProjectGuid>04372851-223D-45AD-97E0-F7639C37C372</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="3.0.1" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="3.0.1" />
+    <PackageReference Include="MaartenH.Minor.Miffy.Abstractions" Version="2.1.0" />
+    <PackageReference Include="MaartenH.Minor.Miffy.Microservices" Version="2.1.0" />
+    <PackageReference Include="MaartenH.Minor.Miffy.RabbitMQBus" Version="2.1.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.0" />
+</ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Data" />
+  </ItemGroup>
+
+</Project>

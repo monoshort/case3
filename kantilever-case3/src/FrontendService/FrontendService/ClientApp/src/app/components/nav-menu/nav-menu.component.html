@@ -1,0 +1,35 @@
+<header>
+  <div class="d-flex justify-content-center">
+    <img class="banner" src="/img/banner.png" alt="Kantilever Banner">
+  </div>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      <a class="navbar-brand" [routerLink]="['/']">Kantilever</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse" [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/']">Artikelen</a>
+          </li>
+          <li>
+            <a class="nav-link text-dark" [routerLink]="['/winkelwagen']">
+              Winkelmandje <fa name="shopping-basket"></fa>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="!isLoggedIn()">
+            <a class="nav-link text-dark" [routerLink]="['/registreer']">Registreren</a>
+          </li>
+          <li class="nav-item" *ngIf="!isLoggedIn()">
+            <a class="nav-link text-dark" (click)="login()">Inloggen</a>
+          </li>
+          <li class="nav-item" *ngIf="isLoggedIn()">
+            <a class="nav-link text-dark" (click)="logout()">Uitloggen</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

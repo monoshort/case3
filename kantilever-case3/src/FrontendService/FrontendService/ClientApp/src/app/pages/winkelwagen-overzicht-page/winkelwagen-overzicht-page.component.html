@@ -1,0 +1,7 @@
+<h4>Winkelwagentje</h4>
+<div>
+    <app-winkelwagen-overzicht [editable]="true"></app-winkelwagen-overzicht>
+</div>
+<div *ngIf="winkelwagenHasArtikelen()" class="action-container">
+    <button id="bestelButton" class="btn btn-success" (click)="bestel()">Bestellen</button>
+</div>

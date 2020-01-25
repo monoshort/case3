@@ -1,0 +1,51 @@
+[
+  {
+    "ApiSecrets": [],
+    "Scopes": [
+      {
+        "Name": "kantilever.webshopapi",
+        "DisplayName": "Kantilever Webshop",
+        "Description": null,
+        "Required": false,
+        "Emphasize": false,
+        "ShowInDiscoveryDocument": true,
+        "UserClaims": []
+      }
+    ],
+    "Enabled": true,
+    "Name": "kantilever.webshopapi",
+    "DisplayName": "Kantilever Webshop",
+    "Description": null,
+    "UserClaims": [
+      "KanBestellen",
+      "name"
+    ],
+    "Properties": {}
+  },
+  {
+    "ApiSecrets": [],
+    "Scopes": [
+      {
+        "Name": "kantilever.backofficeapi",
+        "DisplayName": "Kantilever Back Office",
+        "Description": null,
+        "Required": false,
+        "Emphasize": false,
+        "ShowInDiscoveryDocument": true,
+        "UserClaims": []
+      }
+    ],
+    "Enabled": true,
+    "Name": "kantilever.backofficeapi",
+    "DisplayName": "Kantilever Back Office",
+    "Description": null,
+    "UserClaims": [
+      "KanBestellingInpakken",
+      "KanBestellingKeuren",
+      "KanBetalingRegistreren",
+      "KanArtikelenBijbestellen",
+      "KanWanBetalersBekijken"
+    ],
+    "Properties": {}
+  }
+]

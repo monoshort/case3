@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.0</TargetFramework>
+
+        <IsPackable>false</IsPackable>
+
+        <ProjectGuid>A5CC81B0-7E11-478C-A0E0-976A674827D4</ProjectGuid>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+        <PackageReference Include="MSTest.TestAdapter" Version="2.0.0" />
+        <PackageReference Include="MSTest.TestFramework" Version="2.0.0" />
+        <PackageReference Include="coverlet.collector" Version="1.0.1" />
+        <PackageReference Include="SpecFlow" Version="3.1.76" />
+        <PackageReference Include="SpecFlow.MsTest" Version="3.1.76" />
+        <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.76" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\BackOfficeFrontendService\BackOfficeFrontendService.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Include="BestellingenInpakken\BestellingInpakken.feature" />
+    </ItemGroup>
+
+</Project>

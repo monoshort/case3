@@ -1,0 +1,44 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: if-catalogus-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: if-catalogus-service
+    spec:
+      containers:
+        - name: if-catalogus-service
+          image: minor2019.azurecr.io/kantilever-catalogus:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          env:
+            - name: CatalogusDbConnection
+              valueFrom:
+                secretKeyRef:
+                  name: if-catalogus-secret
+                  key: connectionString
+            - name: eventbus-username
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
+            - name: eventbus-password
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
+            - name: eventbus-port
+              value: '5672'
+            - name: eventbus-hostname
+              value: rabbitmq-svc

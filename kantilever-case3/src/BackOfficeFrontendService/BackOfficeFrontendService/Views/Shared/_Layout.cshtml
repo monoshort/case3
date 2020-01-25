@@ -1,0 +1,94 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+
+@{
+    Func<string> GetUserName = () =>
+    {
+        return User.Claims.FirstOrDefault(claim => claim.Type == "given_name")?.Value ?? User.Identity.Name;
+    };
+}
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kantilever BackOffice</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("styles", false)
+</head>
+<body>
+    <header class="print-hide">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-controller="" asp-action="">
+                    Kantilever backoffice
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        @if ((await AuthorizationService.AuthorizeAsync(User, AuthPolicies.KanBestellingInpakkenPolicy)).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bestelling" asp-action="GetNextInpakBestelling">Volgende bestelling inpakken</a>
+                            </li>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, AuthPolicies.KanArtikelenBijbestellenPolicy)).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Voorraad" asp-action="BijbestelOverzicht">Voorraad bijbestellen</a>
+                            </li>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, AuthPolicies.KanWanBetalersBekijken)).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bestelling" asp-action="WanbetalersOverzicht">Wanbetaler overzicht</a>
+                            </li>
+                        }
+                        @if ((await AuthorizationService.AuthorizeAsync(User, AuthPolicies.KanBestellingKeurenPolicy)).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bestelling" asp-action="GetBestellingenToAccept">Bestellingen goedkeuren</a>
+                            </li>
+                        }
+
+                        @if ((await AuthorizationService.AuthorizeAsync(User, AuthPolicies.KanBetalingRegistrerenPolicy)).Succeeded)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Bestelling" asp-action="GetRegistreerBetaling">Registreer betaling</a>
+                            </li>
+                        }
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Log uit (@GetUserName())</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Log in</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true" async></script>
+@RenderSection("scripts", false)
+</body>
+</html>

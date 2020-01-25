@@ -1,0 +1,7 @@
+<label>Zoeken: <input [(ngModel)]="searchText"></label>
+
+<div class="flex-container">
+  <div *ngFor="let artikel of artikelen | zoekfilter : searchText" class="card-self artikel-container">
+    <app-artikel [artikel]="artikel"></app-artikel>
+  </div>
+</div>

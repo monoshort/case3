@@ -1,0 +1,21 @@
+<div class="card address-type-container">
+    <h5 class="address-type">
+        <ng-content></ng-content>
+    </h5>
+    <table class="table">
+        <tbody *ngIf="adres">
+            <tr>
+                <td>Straat</td>
+                <td id="straathuisnummer">{{ adres.straatnaamHuisnummer }}</td>
+            </tr>
+            <tr>
+                <td>Postcode</td>
+                <td id="postcode">{{ adres.postcode }}</td>
+            </tr>
+            <tr>
+                <td>Woonplaats</td>
+                <td id="woonplaats">{{ adres.woonplaats }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

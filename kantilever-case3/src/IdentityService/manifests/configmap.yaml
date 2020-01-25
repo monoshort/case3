@@ -1,0 +1,228 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: identity-configmap
+data:
+  apis.json: |
+    [
+      {
+        "ApiSecrets": [],
+        "Scopes": [
+          {
+            "Name": "kantilever.webshopapi",
+            "DisplayName": "Kantilever Webshop",
+            "Description": null,
+            "Required": false,
+            "Emphasize": false,
+            "ShowInDiscoveryDocument": true,
+            "UserClaims": []
+          }
+        ],
+        "Enabled": true,
+        "Name": "kantilever.webshopapi",
+        "DisplayName": "Kantilever Webshop",
+        "Description": null,
+        "UserClaims": [
+          "KanBestellen",
+          "name"
+        ],
+        "Properties": {}
+      },
+      {
+        "ApiSecrets": [],
+        "Scopes": [
+          {
+            "Name": "kantilever.backofficeapi",
+            "DisplayName": "Kantilever Back Office",
+            "Description": null,
+            "Required": false,
+            "Emphasize": false,
+            "ShowInDiscoveryDocument": true,
+            "UserClaims": []
+          }
+        ],
+        "Enabled": true,
+        "Name": "kantilever.backofficeapi",
+        "DisplayName": "Kantilever Back Office",
+        "Description": null,
+        "UserClaims": [
+          "KanBestellingInpakken",
+          "KanBestellingKeuren",
+          "KanBetalingRegistreren",
+          "KanArtikelenBijbestellen",
+          "KanWanBetalersBekijken"
+        ],
+        "Properties": {}
+      }
+    ]
+  ids.json: |
+    [
+      {
+        "Required": true,
+        "Emphasize": false,
+        "ShowInDiscoveryDocument": true,
+        "Enabled": true,
+        "Name": "openid",
+        "DisplayName": "Your user identifier",
+        "Description": null,
+        "UserClaims": [
+          "sub"
+        ],
+        "Properties": {}
+      },
+      {
+        "Required": false,
+        "Emphasize": true,
+        "ShowInDiscoveryDocument": true,
+        "Enabled": true,
+        "Name": "profile",
+        "DisplayName": "User profile",
+        "Description": "Your user profile information (first name, last name, etc.)",
+        "UserClaims": [
+          "name",
+          "family_name",
+          "given_name",
+          "middle_name",
+          "nickname",
+          "preferred_username",
+          "profile",
+          "picture",
+          "website",
+          "gender",
+          "birthdate",
+          "zoneinfo",
+          "locale",
+          "updated_at"
+        ],
+        "Properties": {}
+      }
+    ]
+  clients.json: |
+    [
+      {
+        "Enabled": true,
+        "ClientId": "kantilever.backofficemvc",
+        "ProtocolType": "oidc",
+        "ClientSecrets": [
+          {
+            "Description": null,
+            "Value": "o90IbCACXKUkunXoa18cODcLKnQTbjOo5ihEw9j58+8=",
+            "Expiration": null,
+            "Type": "SharedSecret"
+          }
+        ],
+        "RequireClientSecret": true,
+        "ClientName": "Kantilever Back Office",
+        "Description": null,
+        "ClientUri": null,
+        "LogoUri": null,
+        "RequireConsent": false,
+        "AllowRememberConsent": true,
+        "AllowedGrantTypes": [
+          "authorization_code"
+        ],
+        "RequirePkce": true,
+        "AllowPlainTextPkce": false,
+        "AllowAccessTokensViaBrowser": false,
+        "RedirectUris": [
+          "http://admin.macedonieje.maartenprojecten.nl/signin-oidc"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://admin.macedonieje.maartenprojecten.nl/signout-callback-oidc"
+        ],
+        "FrontChannelLogoutUri": "http://admin.macedonieje.maartenprojecten.nl/signout-oidc",
+        "FrontChannelLogoutSessionRequired": true,
+        "BackChannelLogoutUri": null,
+        "BackChannelLogoutSessionRequired": true,
+        "AllowOfflineAccess": true,
+        "AllowedScopes": [
+          "openid",
+          "profile",
+          "kantilever.backofficeapi"
+        ],
+        "AlwaysIncludeUserClaimsInIdToken": false,
+        "IdentityTokenLifetime": 300,
+        "AccessTokenLifetime": 3600,
+        "AuthorizationCodeLifetime": 300,
+        "AbsoluteRefreshTokenLifetime": 2592000,
+        "SlidingRefreshTokenLifetime": 1296000,
+        "ConsentLifetime": null,
+        "RefreshTokenUsage": 1,
+        "UpdateAccessTokenClaimsOnRefresh": false,
+        "RefreshTokenExpiration": 1,
+        "AccessTokenType": 0,
+        "EnableLocalLogin": true,
+        "IdentityProviderRestrictions": [],
+        "IncludeJwtId": false,
+        "Claims": [],
+        "AlwaysSendClientClaims": false,
+        "ClientClaimsPrefix": "client_",
+        "PairWiseSubjectSalt": null,
+        "UserSsoLifetime": null,
+        "UserCodeType": null,
+        "DeviceCodeLifetime": 300,
+        "AllowedCorsOrigins": [],
+        "Properties": {}
+      },
+      {
+        "Enabled": true,
+        "ClientId": "kantilever.webshop.angular",
+        "ProtocolType": "oidc",
+        "ClientSecrets": [],
+        "RequireClientSecret": false,
+        "ClientName": "Kantilever Webshop",
+        "Description": null,
+        "ClientUri": null,
+        "LogoUri": null,
+        "RequireConsent": false,
+        "AllowRememberConsent": true,
+        "AllowedGrantTypes": [
+          "implicit"
+        ],
+        "RequirePkce": true,
+        "AllowPlainTextPkce": false,
+        "AllowAccessTokensViaBrowser": true,
+        "RedirectUris": [
+          "http://macedonieje.maartenprojecten.nl/auth-callback",
+          "http://macedonieje.maartenprojecten.nl/"
+        ],
+        "PostLogoutRedirectUris": [
+          "http://macedonieje.maartenprojecten.nl/"
+        ],
+        "FrontChannelLogoutUri": null,
+        "FrontChannelLogoutSessionRequired": true,
+        "BackChannelLogoutUri": null,
+        "BackChannelLogoutSessionRequired": true,
+        "AllowOfflineAccess": false,
+        "AllowedScopes": [
+          "openid",
+          "profile",
+          "kantilever.webshopapi"
+        ],
+        "AlwaysIncludeUserClaimsInIdToken": false,
+        "IdentityTokenLifetime": 300,
+        "AccessTokenLifetime": 3600,
+        "AuthorizationCodeLifetime": 300,
+        "AbsoluteRefreshTokenLifetime": 2592000,
+        "SlidingRefreshTokenLifetime": 1296000,
+        "ConsentLifetime": null,
+        "RefreshTokenUsage": 1,
+        "UpdateAccessTokenClaimsOnRefresh": false,
+        "RefreshTokenExpiration": 1,
+        "AccessTokenType": 0,
+        "EnableLocalLogin": true,
+        "IdentityProviderRestrictions": [],
+        "IncludeJwtId": false,
+        "Claims": [],
+        "AlwaysSendClientClaims": false,
+        "ClientClaimsPrefix": "client_",
+        "PairWiseSubjectSalt": null,
+        "UserSsoLifetime": null,
+        "UserCodeType": null,
+        "DeviceCodeLifetime": 300,
+        "AllowedCorsOrigins": [
+          "http://macedonieje.maartenprojecten.nl"
+        ],
+        "Properties": {}
+      }
+    ]

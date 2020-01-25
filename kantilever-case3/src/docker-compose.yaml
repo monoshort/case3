@@ -1,0 +1,129 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres:12.1
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: root
+    ports:
+      - 5432:5432
+  dscatalogus-service:
+    image: minor2019.azurecr.io/kantilever-catalogus:1.0
+    restart: always
+    environment:
+      CatalogusDbConnection: "Host=postgres;Port=5432;Database=CatalogusServiceDb;Username=postgres;Password=root"
+      eventbus-hostname: 'rabbitmq'
+      eventbus-port: 5672
+      eventbus-username: guest
+      eventbus-password: guest
+    ports:
+      - '2020:80'
+    expose:
+      - '80'
+  dsmagazijn-service:
+    image: minor2019.azurecr.io/kantilever-magazijn:1.0
+    restart: always
+    environment:
+      - MagazijnDbConnection=Host=postgres;Port=5432;Database=MagazijnServiceDb;Username=postgres;Password=root
+      - eventbus-hostname=rabbitmq
+      - eventbus-port=5672
+      - eventbus-username=guest
+      - eventbus-password=guest
+    ports:
+      - '2021:80'
+    expose:
+      - '80'
+  miffy-auditlog:
+    image: minor2019.azurecr.io/kantilever-auditlog:1.0
+    restart: always
+    environment:
+      - AuditLogDbConnection=Host=postgres;Port=5432;Database=AuditLogServiceDb;Username=postgres;Password=root
+      - eventbus-hostname=rabbitmq
+      - eventbus-port=5672
+      - eventbus-username=guest
+      - eventbus-password=guest
+    ports:
+      - '2022:80'
+    expose:
+      - '80'
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    restart: unless-stopped
+    ports:
+      - 5672:5672
+      - 15672:15672
+  pgadmin:
+    image: dpage/pgadmin4:4.16
+    restart: unless-stopped
+    ports:
+      - 5050:5050
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@kantilever.nl
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 5050
+  frontend:
+    restart: on-failure
+    ports:
+      - 4000:80
+    environment:
+        BROKER_CONNECTION_STRING: amqp://guest:guest@rabbitmq
+        BROKER_EXCHANGE_NAME: Kantilever.Eventbus
+        BROKER_REPLAY_EXCHANGE_NAME: Kantilever.FrontendService.ReplayExchange
+        AUDITLOGGER_URL: http://miffy-auditlog
+        DB_CONNECTION_STRING: User ID=postgres;Password=root;Host=postgres;Port=5432;Database=FrontendServiceDb;
+        CATALOGUS_SERVICE_URL: http://dscatalogus-service
+        VOORRAAD_SERVICE_URL: http://dsmagazijn-service
+        AUTH_AUTHORITY: http://identity:5000
+        ANGULAR_AUTHORITY: http://identity:5000
+        ANGULAR_CLIENTID: kantilever.webshop.angular
+        ANGULAR_RESPONSE_TYPE: id_token token
+        ANGULAR_REDIRECT_URI: http://localhost:4000/auth-callback
+        ANGULAR_SCOPE: openid profile kantilever.webshopapi
+        ANGULAR_POST_LOGOUT_REDIRECT_URI: http://localhost:4000
+
+  identity:
+    restart: on-failure
+    ports:
+      - 5000:5000
+    environment:
+      ASPNETCORE_URLS: http://+:5000
+      BROKER_CONNECTION_STRING: amqp://guest:guest@rabbitmq
+      BROKER_EXCHANGE_NAME: Kantilever.Eventbus
+      DB_CONNECTION_STRING: User ID=postgres;Password=root;Host=postgres;Port=5432;Database=IdentityServiceDb;
+      CONFIG_PATH_CLIENTS: /app/Data/clients.json
+      CONFIG_PATH_IDS: /app/Data/ids.json
+      CONFIG_PATH_APIS: /app/Data/apis.json
+
+  klant:
+    restart: on-failure
+    environment:
+      BROKER_CONNECTION_STRING: amqp://guest:guest@rabbitmq
+      BROKER_EXCHANGE_NAME: Kantilever.Eventbus
+      DB_CONNECTION_STRING: User ID=postgres;Password=root;Host=postgres;Port=5432;Database=KlantServiceDb;
+
+  bestel:
+    restart: on-failure
+    environment:
+      BROKER_CONNECTION_STRING: amqp://guest:guest@rabbitmq
+      BROKER_EXCHANGE_NAME: Kantilever.Eventbus
+      DB_CONNECTION_STRING: User ID=postgres;Password=root;Host=postgres;Port=5432;Database=BestelServiceDb;
+      BROKER_REPLAY_EXCHANGE_NAME: Kantilever.BestelService.ReplayExchange
+      AUDITLOGGER_URL: http://miffy-auditlog
+
+  backoffice-frontend:
+    restart: on-failure
+    ports:
+      - 3000:80
+    environment:
+      BROKER_CONNECTION_STRING: amqp://guest:guest@rabbitmq
+      BROKER_EXCHANGE_NAME: Kantilever.Eventbus
+      DB_CONNECTION_STRING: User ID=postgres;Password=root;Host=postgres;Port=5432;Database=BackOfficeFrontendServiceDb;
+      AUTH_CLIENT_SECRET: 49C1A7E1-0C79-4A89-A3D6-A37998FB86B0
+      AUTH_CLIENT_ID: kantilever.backofficemvc
+      AUTH_AUTHORITY: http://identity:5000
+      VOORRAAD_SERVICE_URL: http://dsmagazijn-service
+      CATALOGUS_SERVICE_URL: http://dscatalogus-service
+      AUDITLOGGER_URL: http://miffy-auditlog
+      BROKER_REPLAY_EXCHANGE_NAME: Kantilever.BackOfficeFrontendService.ReplayExchange
+

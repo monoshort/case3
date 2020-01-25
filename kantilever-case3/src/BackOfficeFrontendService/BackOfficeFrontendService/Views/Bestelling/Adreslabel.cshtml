@@ -1,0 +1,18 @@
+﻿@model Bestelling
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/adresLabel.css" />
+}
+
+<div class="label-block">
+    <p>@Model.Klant.Naam</p>
+    <p>@Model.AfleverAdres.StraatnaamHuisnummer</p>
+    <p>@Model.AfleverAdres.Postcode</p>
+    <p>@Model.AfleverAdres.Woonplaats</p>
+</div>
+
+<button class="btn btn-primary d-print-none" id="print-adreslabel-button">Printen</button>
+
+@section scripts {
+    <script src="~/js/adreslabel.js" defer></script>
+}

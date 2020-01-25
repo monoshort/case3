@@ -1,0 +1,38 @@
+<div class="formbody">
+  <div class="card formcard">
+    <div class="card-body">
+      <form [formGroup]="bestelgegevensForm">
+        <h3 class="title">Afleveradres</h3>
+
+        <div class="form-group">
+          <label>Straatnaam en huisnummer:</label>
+          <input class="form-control" type="text" formControlName="straatnaamHuisnummer">
+          <div *ngIf="straatnaamHuisnummer.invalid && (straatnaamHuisnummer.dirty || straatnaamHuisnummer.touched)"
+            class="alert alert-danger">
+            Straatnaam en huisnummer zijn verplicht!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Postcode:</label>
+          <input class="form-control" type="text" formControlName="postcode">
+          <div *ngIf="postcode.invalid && (postcode.dirty || postcode.touched)" class="alert alert-danger">
+            Postcode is verplicht!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Woonplaats:</label>
+          <input class="form-control" type="text" formControlName="woonplaats">
+          <div *ngIf="woonplaats.invalid && (woonplaats.dirty || woonplaats.touched)" class="alert alert-danger">
+            Woonplaats is verplicht!
+          </div>
+        </div>
+
+        <button [disabled]="!bestelgegevensForm.valid" (click)="bestel()" class="btn btn-primary">
+          Verder naar bestellen
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

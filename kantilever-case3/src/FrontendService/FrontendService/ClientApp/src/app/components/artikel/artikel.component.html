@@ -1,0 +1,25 @@
+<div class="card artikel-container">
+  <div [routerLink]="['/artikel', artikel.id]">
+    <img src="/img/{{ artikel.afbeeldingUrl }}" class="card-img-top img-height" alt="fiets">
+    <div class="card-body">
+      <h5 id="naam" class="card-title">{{ artikel.naam }}</h5>
+      <p id="price" class="card-text">{{ artikel.prijsInclBtw | currency:'EUR' }}</p>
+      <p id="amount" class="card-text">
+        <!--- TODO: Lijkt me makkelijker om dit soort business logic op te nemen in de api --->
+        {{ artikel.beschikbaarAantal > 8 ? 8 : artikel.beschikbaarAantal || 'Niet' }} op voorraad
+      </p>
+    </div>
+  </div>
+  <div class="order-form">
+    <form class="button-container" [formGroup]="aanWinkelwagenToevoegForm">
+      <input min="1" class="form-control small" type="number" formControlName="hoeveelheid">
+      <button type="button" (click)="addToWinkelwagen()" class="btn btn-primary big">
+        <span>
+          <fa name="plus"></fa>
+          &nbsp;
+          <fa name="shopping-basket"></fa>
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

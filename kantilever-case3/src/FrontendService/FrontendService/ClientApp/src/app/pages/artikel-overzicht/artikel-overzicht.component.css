@@ -1,0 +1,13 @@
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.card-self {
+    flex-basis: 23%;
+}
+
+.artikel-container {
+    margin: 0.5rem;
+}

@@ -1,0 +1,9 @@
+.factuur--container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.factuur--logo {
+    height: 5em;
+    margin-bottom: 2em;
+}

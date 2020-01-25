@@ -1,0 +1,38 @@
+@model IEnumerable<Bestelling>
+
+<h1>Wanbetaler overzicht</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Bestelling nummer</th>
+        <th scope="col">Klant</th>
+        <th scope="col">Telefoonnummer</th>
+        <th scope="col">Besteldatum</th>
+        <th scope="col">Totaalbedrag</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (Bestelling bestelling in Model)
+    {
+        <tr>
+            <td>
+                @bestelling.BestellingNummer
+            </td>
+            <td>
+                @bestelling.Klant.Naam
+            </td>
+            <td>
+                @bestelling.Klant.Telefoonnummer
+            </td>
+            <td>
+                @bestelling.BestelDatum.ToString("dd-MM-yyyy")
+            </td>
+            <td>
+                @($"{bestelling.SubtotaalInclusiefBtw:c}")
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+    

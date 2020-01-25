@@ -1,0 +1,46 @@
+﻿@model Bestelling
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/bestellingInpakken.css"/>
+}
+
+<h1>Bestelling inpakken</h1>
+
+<h2>Artikelen</h2>
+<p>Bestellingnummer: @Model.BestellingNummer</p>
+<div class="artikel-container">
+
+    @foreach (var bestelRegel in Model.BestelRegels)
+    {
+        <div class="artikel">
+            <div>
+                <img src="~/img/@bestelRegel.AfbeeldingUrl" alt="Artikel afbeelding" />
+                <div class="artikel-label">
+                    <div>Leverancierscode: @bestelRegel.Leverancierscode</div>
+                    <div>Naam: @bestelRegel.Naam</div>
+                    <div>Aantal: @bestelRegel.Aantal</div>
+                </div>
+            </div>
+
+            <label class="klaar">
+                <a class="btn btn-primary @(bestelRegel.Ingepakt ? "disabled" : "")" asp-controller="Bestelling" asp-action="VinkBestelregelAan" asp-route-bestellingId="@Model.Id" asp-route-bestelregelId="@bestelRegel.Id">Inpakken</a>
+            </label>
+        </div>
+    }
+    <a class="btn btn-primary" asp-controller="Bestelling" asp-action="GetFactuur" asp-route-bestellingId="@Model.Id">
+        Print factuur
+    </a>
+
+    <a class="btn btn-primary" asp-controller="Bestelling" asp-action="GetAdresLabel" asp-route-bestellingId="@Model.Id">
+        Print adreslabel
+    </a>
+    @if (ViewBag.Error != null)
+    {
+        <span class="alert alert-danger" role="alert">
+            @ViewBag.Error
+        </span>
+    }
+    <a class="btn btn-primary @(Model.KanKlaarGemeldWorden ? "active" : "disabled")" asp-controller="Bestelling" asp-action="MeldKlaar" asp-route-bestellingId="@Model.Id">
+        Meld klaar
+    </a>
+</div>

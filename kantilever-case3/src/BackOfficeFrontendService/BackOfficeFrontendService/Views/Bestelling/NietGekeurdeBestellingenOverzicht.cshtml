@@ -1,0 +1,49 @@
+@model IEnumerable<Bestelling>
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/bestellingOverzicht.css" />
+}
+<h1>Bestellingen overzicht</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Klant</th>
+            <th scope="col">Telefoonnummer</th>
+            <th scope="col">Besteldatum</th>
+            <th scope="col">Totaalbedrag</th>
+            <th scope="col" colspan="2"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Bestelling bestelling in Model)
+        {
+            <tr>
+                <td>
+                    @bestelling.Klant.Naam
+                </td>
+                <td>
+                    @bestelling.Klant.Telefoonnummer
+                </td>
+                <td>
+                    @bestelling.BestelDatum.ToString("dd-MM-yyyy")
+                </td>
+                <td>
+                    @($"{bestelling.SubtotaalInclusiefBtw:c}")
+                </td>
+                <td>
+                    <a asp-controller="Bestelling" asp-action="GetBestellingDetails" asp-route-bestellingNummer="@bestelling.BestellingNummer">
+                        Details
+                    </a>
+                </td>
+                <td class="naar-rechts">
+                    <a asp-controller="Bestelling" asp-action="KeurBestellingGoed" asp-route-bestellingId="@bestelling.Id">
+                        Goedkeuren
+                    </a>
+                    <a asp-controller="Bestelling" asp-action="KeurBestellingAf" asp-route-bestellingId="@bestelling.Id">
+                        Afkeuren
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

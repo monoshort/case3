@@ -1,0 +1,49 @@
+﻿@model BestellingDetailViewModel
+
+@{
+    ViewData["Title"] = "GetBestellingDetails";
+}
+
+<h1>Details van bestelling @Model.Bestelling.BestellingNummer</h1>
+
+<div class="card">
+    <h4 class="card-header">Klant</h4>
+    <div class="card-body">
+        <p class="card-text">
+            <p>Naam: @Model.Bestelling.Klant.Naam</p>
+            <p>Telefoonnummer: @Model.Bestelling.Klant.Telefoonnummer</p>
+            <p>Adres: @Model.Bestelling.Klant.Factuuradres.StraatnaamHuisnummer</p>
+            <p>Postcode: @Model.Bestelling.Klant.Factuuradres.Postcode</p>
+            <p>Woonplaats: @Model.Bestelling.Klant.Factuuradres.Woonplaats</p>
+        </p>
+    </div>
+
+    <h4 class="card-header">Bestelling</h4>
+    <div class="card-body">
+        <p class="card-text">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Artikel</th>
+                        <th scope="col">Prijs</th>
+                        <th scope="col">Aantal</th>
+                        <th scope="col">Subtotaal incl.</th>
+                        <th scope="col">Subtotaal excl.</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var bestelregel in Model.Bestelling.BestelRegels)
+                    {
+                        <tr>
+                            <td>@bestelregel.Naam</td>
+                            <td>@($"{bestelregel.StukPrijs:c}")</td>
+                            <td>@bestelregel.Aantal</td>
+                            <td>@($"{bestelregel.RegelPrijsInclusiefBtw:c}")</td>
+                            <td>@($"{bestelregel.RegelPrijs:c}")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </p>
+    </div>
+</div>

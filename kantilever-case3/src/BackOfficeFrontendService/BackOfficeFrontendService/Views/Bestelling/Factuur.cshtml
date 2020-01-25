@@ -1,0 +1,66 @@
+@model Bestelling
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/css/factuur.css"/>
+    <link rel="stylesheet" type="text/css" href="~/css/bestellingInpakken.css"/>
+}
+
+<div class="factuur--container">
+    <main>
+        <img src="~/img/logo.png" alt="Kantilever logo" class="factuur--logo"/>
+        <p>Naam: @Model.Klant.Naam</p>
+        <p>
+            Factuuradres: @Model.Klant.Factuuradres.StraatnaamHuisnummer, @Model.Klant.Factuuradres.Postcode @Model.Klant.Factuuradres.Woonplaats
+        </p>
+        <p>Telefoonnummer: @Model.Klant.Telefoonnummer</p>
+    </main>
+    <aside>
+        <p>Kantilever B.V.</p>
+        <p>Kruisboog 42</p>
+        <p>3905 TG Veenendaal</p>
+        <p>Tel: +31 318 552020</p>
+        <p>Email: info@kantilever.nl</p>
+        <p>IBAN: NL44 ABNA 00058 54051</p>
+        <p>K.v.K. 3013 5370</p>
+        <p>BTW NL8062.30.277.B01</p>
+    </aside>
+</div>
+
+<table class="table table-sm" description="">
+    <thead>
+        <tr>
+            <th scope="col">Leveranciercode</th>
+            <th scope="col">Artikel</th>
+            <th scope="col">Aantal</th>
+            <th scope="col">StukPrijs</th>
+            <th scope="col">Subtotaal</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (BestelRegel bestelRegel in Model.BestelRegels)
+    {
+        <tr>
+            <td>@bestelRegel.Leverancierscode</td>
+            <td>@bestelRegel.Naam</td>
+            <td>@bestelRegel.Aantal</td>
+            <td>€@($"{bestelRegel.StukPrijs:0.00}"),-</td>
+            <td>€@($"{bestelRegel.RegelPrijs:0.00}"),-</td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4"></td>
+            <td>
+                €@($"{Model.SubtotaalInclusiefBtwMetVerzendKosten:0.00}"),- incl. btw<br/>
+                €@($"{Model.SubtotaalInclusiefBtw:0.00}"),- excl. btw
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<button class="btn btn-primary d-print-none" id="print-factuur-button">Printen</button>
+
+@section scripts {
+    <script src="~/js/factuur.js" defer></script>
+}

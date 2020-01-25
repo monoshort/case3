@@ -1,0 +1,57 @@
+﻿@model BetalingRegistrerenViewModel
+@{
+    ViewData["Title"] = "Registreer betaling";
+}
+
+<h1>Registreer betaling</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <div class="text-danger">
+            <ul id="errorContainer">
+            </ul>
+        </div>
+        <form asp-action="BetalingRegistreren">
+            <div class="form-group row">
+                <label asp-for="BestellingNummer" class="col-sm-4 col-form-label">Bestellingnummer</label>
+                <div class="col-sm-6">
+                    <input value="@Model.BestellingNummer" type="number" min="0" asp-for="BestellingNummer" class="form-control" id="bestelNummer">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="OpenstaandBedrag" class="col-sm-4 col-form-label">Openstaand bedrag</label>
+                <div class="col-sm-6">
+                    <input value="@Model.OpenstaandBedrag" type="number" min="0" step="0.01" asp-for="OpenstaandBedrag" class="form-control" id="openstaandBedrag" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="BetaaldBedrag" class="col-sm-4 col-form-label">Betaald bedrag</label>
+                <div class="col-sm-6">
+                    <input value="@Model.BetaaldBedrag" type="number" min="0" step="0.01" asp-for="BetaaldBedrag" class="form-control" id="betaaldBedrag">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Verschil" class="col-sm-4 col-form-label"></label>
+                <div class="col-sm-6">
+                    <label id="verschil"></label>
+                </div>
+            </div>
+            @if (ViewBag.Error != null)
+            {
+                <span class="alert alert-danger form-group row" role="alert">
+                    @ViewBag.Error
+                </span>
+            }
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <input type="submit" value="Registreer betaling" class="btn btn-primary" id="submitButton" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/js/registreerBetaling.js" defer></script>
+}

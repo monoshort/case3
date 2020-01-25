@@ -1,0 +1,28 @@
+version: '3.5'
+
+services:
+  frontend:
+    build:
+      context: FrontendService/FrontendService
+      args:
+        source: obj/Docker
+  identity:
+    build:
+      context: IdentityService/IdentityService
+      args:
+        source: obj/Docker
+  klant:
+    build:
+      context: KlantService/KlantService
+      args:
+        source: obj/Docker
+  bestel:
+    build:
+      context: BestelService/BestelService
+      args:
+        source: obj/Docker
+  backoffice-frontend:
+    build:
+      context: BackOfficeFrontendService/BackOfficeFrontendService
+      args:
+        source: obj/Docker

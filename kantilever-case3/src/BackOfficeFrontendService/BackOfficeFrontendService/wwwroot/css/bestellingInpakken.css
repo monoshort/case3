@@ -1,0 +1,39 @@
+.artikel {
+    display: flex;
+    height: 128px;
+    justify-content: space-between;
+    align-items: center;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    margin: 12px 6px;
+    font-size: 22px;
+}
+
+.artikel img {
+    width: 96px;
+    height: 96px;
+    background-color: black;
+    border-style: solid;
+    border-width: 2px;
+    border-color: gray;
+    margin-left: 16px;
+}
+
+.artikel > div {
+    display: flex;
+    align-items: center;
+}
+
+.artikel-label {
+    margin-left: 8px;
+}
+
+.artikel input {
+    height: 42px;
+    width: 42px;
+}
+
+.artikel .klaar {
+    margin-right: 32px;
+}

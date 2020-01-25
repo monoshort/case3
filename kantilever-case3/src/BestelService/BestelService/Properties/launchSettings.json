@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "BestelService": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DB_CONNECTION_STRING": "Host=localhost;Port=5432;Database=BestelServiceDb;Username=postgres;Password=root",
+        "BROKER_EXCHANGE_NAME": "Kantilever.Eventbus",
+        "BROKER_CONNECTION_STRING": "amqp://guest:guest@localhost:5672",
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AUDITLOGGER_URL": "http://localhost:2022",
+        "BROKER_REPLAY_EXCHANGE_NAME": "Kantilever.BackOfficeFrontendService.ReplayExchange"
+      }
+    }
+  }
+}

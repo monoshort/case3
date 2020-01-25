@@ -1,0 +1,44 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: bestel-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: bestel-service
+    spec:
+      containers:
+        - name: bestel-service
+          image: minor2019.azurecr.io/macedonieje-bestel-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          env:
+            - name: BROKER_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: url
+            - name: BROKER_EXCHANGE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret-url
+                  key: exchange
+            - name: DB_CONNECTION_STRING
+              valueFrom:
+                secretKeyRef:
+                  name: bestelservice-secret
+                  key: connectionString
+            - name: AUDITLOGGER_URL
+              value: http://if-auditlog-service
+            - name: BROKER_REPLAY_EXCHANGE_NAME
+              value: Kantilever.BestelService.ReplayExchange

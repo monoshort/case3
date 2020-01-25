@@ -1,0 +1,16 @@
+﻿.label-block {
+    border: 3px dashed black;
+    padding: 18px;
+    width: 50%;
+    height: 100px;
+    font-size: 24px;
+    display: table;
+}
+
+#print-adreslabel-button {
+    margin-top: 1rem;
+}
+
+p {
+    margin: 0;
+}

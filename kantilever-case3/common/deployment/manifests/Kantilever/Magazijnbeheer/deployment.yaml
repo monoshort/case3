@@ -1,0 +1,44 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: if-magazijn-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: if-magazijn-service
+    spec:
+      containers:
+        - name: if-magazijn-service
+          image: minor2019.azurecr.io/kantilever-magazijn:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 250m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 50Mi
+          env:
+            - name: MagazijnDbConnection
+              valueFrom:
+                secretKeyRef:
+                  name: if-magazijnbeheer-secret
+                  key: connectionString
+            - name: eventbus-username
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: username
+            - name: eventbus-password
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secret
+                  key: password
+            - name: eventbus-port
+              value: '5672'
+            - name: eventbus-hostname
+              value: rabbitmq-svc
